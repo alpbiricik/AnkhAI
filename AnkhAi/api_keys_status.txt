@@ -1,0 +1,34 @@
+ANKHAI API ANAHTARLARI DURUMU
+================================
+
+✅ TAMAMLANAN:
+1. OpenWeatherMap API
+   - Anahtar: caa3020901fab7bb37dd8155d7be1d1c
+   - Durum: Aktif
+   - Limit: 1000 istek/gün
+
+✅ TAMAMLANAN:
+2. OpenAI API Key
+   - Anahtar: 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
+   - Durum: Aktif
+   - Limit: $5 kredi (ücretsiz)
+
+3. Google Gemini API Key
+   - Anahtar: AIzaSyAjrbEbyrqJpj3ZUDWwGYkVaZqVQ57B_s8
+   - Durum: Aktif
+   - Limit: 15 istek/dakika
+
+❌ EKSİK:
+
+4. Cloudinary Credentials
+   - Durum: Eksik
+   - Link: https://cloudinary.com/
+   - Limit: 25 kredi/ay
+
+5. Firebase Credentials
+   - Durum: Eksik
+   - Link: https://console.firebase.google.com/
+   - Limit: 5GB depolama
+
+✅ TÜM API ANAHTARLARI GITHUB'A YÜKLENDİ!
+NOT: Diğer geliştiriciler bu anahtarları kullanabilir.

@@ -1,0 +1,150 @@
+version: '3.8'
+
+services:
+  # API Gateway
+  gateway-api:
+    build: ./services/gateway-api
+    ports:
+      - "8000:8000"
+    environment:
+      - AUTH_SERVICE_URL=http://auth-service:8001
+      - OUTFIT_SERVICE_URL=http://outfit-service:8002
+      - CELEBRITY_SERVICE_URL=http://celebrity-style-service:8003
+      - WEATHER_SERVICE_URL=http://weather-service:8004
+      - RECOMMENDATION_SERVICE_URL=http://recommendation-service:8005
+      - MEDIA_SERVICE_URL=http://media-service:8006
+    depends_on:
+      - auth-service
+      - outfit-service
+      - celebrity-style-service
+      - weather-service
+      - recommendation-service
+      - media-service
+    networks:
+      - ankhai-network
+
+  # Authentication Service
+  auth-service:
+    build: ./services/auth-service
+    ports:
+      - "8001:8001"
+    environment:
+      - DATABASE_URL=postgresql://ankhai_user:ankhai_password@postgres:5432/ankhai_auth
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+      - JWT_ALGORITHM=HS256
+      - ACCESS_TOKEN_EXPIRE_MINUTES=30
+    depends_on:
+      - postgres
+    networks:
+      - ankhai-network
+
+  # Outfit Analysis Service
+  outfit-service:
+    build: ./services/outfit-service
+    ports:
+      - "8002:8002"
+    environment:
+      - DATABASE_URL=postgresql://ankhai_user:ankhai_password@postgres:5432/ankhai_outfits
+      - YOLO_MODEL_PATH=/app/models/yolov8n.pt
+      - MEDIA_SERVICE_URL=http://media-service:8006
+    volumes:
+      - ./models:/app/models
+    depends_on:
+      - postgres
+      - media-service
+    networks:
+      - ankhai-network
+
+  # Celebrity Style Service
+  celebrity-style-service:
+    build: ./services/celebrity-style-service
+    ports:
+      - "8003:8003"
+    environment:
+      - DATABASE_URL=postgresql://ankhai_user:ankhai_password@postgres:5432/ankhai_celebrity
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+    depends_on:
+      - postgres
+    networks:
+      - ankhai-network
+
+  # Weather Service
+  weather-service:
+    build: ./services/weather-service
+    ports:
+      - "8004:8004"
+    environment:
+      - OPENWEATHER_API_KEY=${OPENWEATHER_API_KEY}
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - redis
+    networks:
+      - ankhai-network
+
+  # Recommendation Service
+  recommendation-service:
+    build: ./services/recommendation-service
+    ports:
+      - "8005:8005"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - OUTFIT_SERVICE_URL=http://outfit-service:8002
+      - CELEBRITY_SERVICE_URL=http://celebrity-style-service:8003
+      - WEATHER_SERVICE_URL=http://weather-service:8004
+    depends_on:
+      - outfit-service
+      - celebrity-style-service
+      - weather-service
+    networks:
+      - ankhai-network
+
+  # Media Service
+  media-service:
+    build: ./services/media-service
+    ports:
+      - "8006:8006"
+    environment:
+      - CLOUDINARY_CLOUD_NAME=${CLOUDINARY_CLOUD_NAME}
+      - CLOUDINARY_API_KEY=${CLOUDINARY_API_KEY}
+      - CLOUDINARY_API_SECRET=${CLOUDINARY_API_SECRET}
+      - FIREBASE_STORAGE_BUCKET=${FIREBASE_STORAGE_BUCKET}
+      - FIREBASE_CREDENTIALS_PATH=/app/firebase-credentials.json
+    volumes:
+      - ./firebase-credentials.json:/app/firebase-credentials.json:ro
+    networks:
+      - ankhai-network
+
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15
+    environment:
+      - POSTGRES_USER=ankhai_user
+      - POSTGRES_PASSWORD=ankhai_password
+      - POSTGRES_DB=ankhai_auth
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    ports:
+      - "5432:5432"
+    networks:
+      - ankhai-network
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - ankhai-network
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  ankhai-network:
+    driver: bridge

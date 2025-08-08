@@ -1,0 +1,207 @@
+# Environment variables
+.env.local
+.env.production
+.env.staging
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Docker
+.dockerignore
+
+# Logs
+*.log
+logs/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Models and data
+models/*.pt
+models/*.pth
+models/*.onnx
+models/*.pb
+data/
+datasets/
+
+# Firebase
+firebase-credentials.json
+google-services.json
+GoogleService-Info.plist
+
+# Flutter
+frontend/.dart_tool/
+frontend/.flutter-plugins
+frontend/.flutter-plugins-dependencies
+frontend/.packages
+frontend/.pub-cache/
+frontend/.pub/
+frontend/build/
+frontend/ios/Pods/
+frontend/android/.gradle/
+frontend/android/app/build/
+frontend/android/local.properties
+
+# Node.js (if any frontend tools)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# PEP 582
+__pypackages__/
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# API keys and secrets
+secrets/
+keys/
+*.key
+*.pem
+*.p12
+*.pfx
+
+# Local development
+local/
+dev/
+
+# Gereksiz dosyalar - kaldırılacak
+../150121052HW4/
+../HW2_150121052/
+../Term2_Project/
+../pro3_1_150121052.c
+../pro3_2_150121052.c
+../src/
+../.DS_Store
+../0727(1).mov
+../AnkhAI-osuruk/
+../Content Guard/
+../Content Moderation/
+../Dreamer/
+../Ekran Resmi 2025-07-25*.png
+../Ekran Resmi 2025-07-29*.png
+../Ekran Resmi 2025-07-30*.png
+../Ekran Resmi 2025-07-31*.png
+../Ekran Resmi 2025-08-01*.png
+../Ekran Resmi 2025-08-04*.png
+../Ekran Resmi 2025-08-05*.png
+../Ekran Resmi 2025-08-07*.png
+../Ekran Resmi 2025-08-08*.png
+../Eski okul projeleri/
+../KatalogAI Geliştirme Raporu.*
+../LLM Karşılaştırma Projesi*
+../LLM deneme.*
+../LLM_Yanit_Formatli.pdf
+../Quiz App/
+../SONUÇLAR.docx
+../Selenium test/
+../Shopping-List/
+../Touch Bar Resmi 2025-07-30*.png
+../Yeni Rapor .pdf
+../awesome-blog/
+../c çalışma/
+../deneme/
+../ege-tabiat/
+../freelancer/
+../katalog ai deneme/
+../katalogai deneme/
+../katalogai-original/
+../katalogai.zip
+../katalogai/
+../signal proje/
